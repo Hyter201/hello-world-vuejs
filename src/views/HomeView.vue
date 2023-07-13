@@ -1,16 +1,21 @@
+<!-- ordinamento di posizione dei vari componenti -->
 <template>
-  <hello-world />
+  <div>
+    <hello-world />
+    <prova-world />
+  </div>
 </template>
 
+<!-- Registrazione componenti -->
 <script>
-  import HelloWorld from '../components/HelloWorld'
+import HelloWorld from '../components/HelloWorld'
+import ProvaWorld from '../components/provaWorld.vue';
 
-  export default {
-    name: 'Home-',
-
-    components: {
-      HelloWorld,
-    },
-  }
+export default {
+  name: 'HomePage',
+  components: {
+    HelloWorld,
+    ProvaWorld,
+  },
+}
 </script>
-

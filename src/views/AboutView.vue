@@ -1,5 +1,18 @@
+<!-- ordinamento di posizione dei vari componenti -->
 <template>
-  <div class="about">
-    <h1>Pagina About</h1>
+  <div>
+    <hello-world />
   </div>
 </template>
+
+<!-- Registrazione componenti -->
+<script>
+import HelloWorld from '../components/HelloWorld'
+
+export default {
+  name: 'HomePage',
+  components: {
+    HelloWorld,
+  },
+}
+</script>

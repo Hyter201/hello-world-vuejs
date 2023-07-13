@@ -5,7 +5,7 @@
         <v-btn block elevation="2">Bottone 1</v-btn>
       </v-col>
       <v-col cols="4">
-        <v-btn block elevation="2">Bottone 2</v-btn>
+        <router-link to="/"><v-btn block elevation="2">Home</v-btn></router-link>
       </v-col>
       <v-col cols="4">
         <!-- Router link serve per collegare le pagine -->
