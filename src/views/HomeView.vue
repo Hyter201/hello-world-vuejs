@@ -2,20 +2,17 @@
 <template>
   <div>
     <hello-world />
-    <prova-world />
   </div>
 </template>
 
 <!-- Registrazione componenti -->
 <script>
 import HelloWorld from '../components/HelloWorld'
-import ProvaWorld from '../components/provaWorld.vue';
 
+// Questo export consente l'attivazione effettiva del componente
 export default {
-  name: 'HomePage',
   components: {
-    HelloWorld,
-    ProvaWorld,
+    HelloWorld
   },
 }
 </script>

@@ -1,18 +1,19 @@
 <!-- ordinamento di posizione dei vari componenti -->
 <template>
   <div>
-    <hello-world />
+    <completed-world />
   </div>
 </template>
 
 <!-- Registrazione componenti -->
 <script>
-import HelloWorld from '../components/HelloWorld'
+import CompletedWorld from '../components/CompletedWorld'
 
+
+// Questo export consente l'attivazione effettiva del componente
 export default {
-  name: 'HomePage',
   components: {
-    HelloWorld,
+    CompletedWorld
   },
 }
 </script>

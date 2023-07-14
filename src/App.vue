@@ -5,6 +5,7 @@
       color="primary"
       dark
     >
+    <router-link to="/">
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -24,7 +25,7 @@
           width="100"
         />
       </div>
-
+    </router-link>
       <v-spacer></v-spacer>
 
       <v-btn
@@ -32,7 +33,7 @@
         target="_blank"
         text
       >
-        <span class="mr-2">Latest Release</span>
+      <router-link to="/completati" style="color: white; text-decoration: none;">To-do Completati</router-link>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
