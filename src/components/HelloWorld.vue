@@ -24,19 +24,36 @@
         <h1>Da fare:</h1>
       </v-col>
 
-      <v-col cols="12" md="5">
-        <v-text-field v-model="newTodo" placeholder="Cosa devo fare?" solo></v-text-field>
+      <!-- pulsanti e textarea  -->
+      <v-col v-if="!isEditing" cols="12" md="5">
+        <v-text-field v-model="newTodo" @keyup.enter="AddTodo" placeholder="Cosa devo fare?" solo></v-text-field>
+      </v-col>
+      <v-col v-else cols="12" md="5">
+        <v-text-field v-model="newTodo" @keyup.enter="updateTodo" placeholder="Modifichiamo" solo></v-text-field>
       </v-col>
 
-      <v-col>
-        <v-btn elevation="2" outlined @click="AddTodo">Aggiungi</v-btn>
+      <v-col v-if="!isEditing">
+        <v-btn elevation="2" outlined @click="AddTodo" >Aggiungi</v-btn>
       </v-col>
-
+      <v-col v-else>
+        <v-btn elevation="2" outlined @click="updateTodo">Rinomina</v-btn>
+      </v-col>
+      
       <!-- Ciclo lista e imposto indice ad ogni elemento aggiunto -->
       <v-col cols='12'>
         <ol>
           <li v-for="(todo, index) in todos " :key="index">
             {{ todo }}
+
+            <!-- Bottone rinomina -->
+            <button @click="renameTodo(todo, index)" class="me-1 mb-1"
+              style="border: 1px solid black; border-radius: 1rem; padding: 0.3rem; background-color: #67b9f87c; ">Rinomina
+            </button>
+
+            <!-- Bottone Cancella -->
+            <button @click="deleteTodo(index)"
+              style="border: 1px solid black; border-radius: 1rem; padding: 0.3rem; background-color: #f869677c; ">Cancella
+            </button>
           </li>
         </ol>
       </v-col>
@@ -50,6 +67,8 @@ export default {
   // Dati
   data() {
     return {
+      isEditing: false,
+      selectedIndex: null,
       todos: ['Prova 1', 'Prova 2'],
       newTodo: ''
     }
@@ -61,7 +80,25 @@ export default {
       if (this.newTodo !== '') {
         this.newTodo.trim();
         this.todos.push(this.newTodo);
+        this.newTodo = ''
       }
+    },
+
+    renameTodo(todo,index) 
+    { 
+      this.newTodo = todo;
+      this.selectedIndex = index;
+      this.isEditing = true;
+    },
+
+    updateTodo() {
+      this.todos.splice(this.selectedIndex, 1, this.newTodo)
+      this.isEditing = false
+      this.newTodo = ''
+    },
+
+    deleteTodo(index){
+      this.todos.splice(index, 1)
     }
   }
 }
