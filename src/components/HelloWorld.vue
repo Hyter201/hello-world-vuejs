@@ -46,6 +46,8 @@
 
 <script>
 export default {
+
+  // Dati
   data() {
     return {
       todos: ['Prova 1', 'Prova 2'],
@@ -53,6 +55,7 @@ export default {
     }
   },
 
+  // Funzioni 
   methods: {
     AddTodo() {
       if (this.newTodo !== '') {
