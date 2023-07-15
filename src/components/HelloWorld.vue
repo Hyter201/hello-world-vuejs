@@ -33,20 +33,21 @@
       </v-col>
 
       <v-col v-if="!isEditing">
-        <v-btn elevation="2" outlined @click="AddTodo" >Aggiungi</v-btn>
+        <v-btn elevation="2" outlined @click="AddTodo">Aggiungi</v-btn>
       </v-col>
       <v-col v-else>
         <v-btn elevation="2" outlined @click="updateTodo">Rinomina</v-btn>
       </v-col>
-      
+
       <!-- Ciclo lista e imposto indice ad ogni elemento aggiunto -->
       <v-col cols='12'>
-        <ol>
+        <ul>
           <li v-for="(todo, index) in todos " :key="index">
-            {{ todo }}
+            <input v-model="todo.completed" @click="sendTodo(todo)" class="me-2" id="status" type="checkbox" style="transform: scale(1.2);">
+            {{ todo.task }}
 
             <!-- Bottone rinomina -->
-            <button @click="renameTodo(todo, index)" class="me-1 mb-1"
+            <button @click="renameTodo(todo.task, index)" class="me-1 ms-2 mb-1"
               style="border: 1px solid black; border-radius: 1rem; padding: 0.3rem; background-color: #67b9f87c; ">Rinomina
             </button>
 
@@ -55,21 +56,26 @@
               style="border: 1px solid black; border-radius: 1rem; padding: 0.3rem; background-color: #f869677c; ">Cancella
             </button>
           </li>
-        </ol>
+        </ul>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-export default {
 
+import { mapMutations } from 'vuex';
+
+export default {
   // Dati
   data() {
     return {
       isEditing: false,
       selectedIndex: null,
-      todos: ['Prova 1', 'Prova 2'],
+      todos: [
+        { task: 'Prova 1', completed: true },
+        { task: 'Prova 2', completed: false }
+      ],
       newTodo: ''
     }
   },
@@ -79,29 +85,39 @@ export default {
     AddTodo() {
       if (this.newTodo !== '') {
         this.newTodo.trim();
-        this.todos.push(this.newTodo);
+        this.todos.push({ task: this.newTodo, completed: false });
         this.newTodo = ''
       }
     },
 
-    renameTodo(todo,index) 
-    { 
+    renameTodo(todo, index) {
       this.newTodo = todo;
       this.selectedIndex = index;
       this.isEditing = true;
     },
 
     updateTodo() {
-      this.todos.splice(this.selectedIndex, 1, this.newTodo)
+      this.todos.splice(this.selectedIndex, 1, { task: this.newTodo })
       this.isEditing = false
       this.newTodo = ''
     },
 
-    deleteTodo(index){
+    deleteTodo(index) {
       this.todos.splice(index, 1)
-    }
+    },
+
+    // i tre puntini consentono la modifica effettiva con vuex
+    ...mapMutations(['setArray']),
+    sendTodo(todo) {
+      todo.completed = !todo.completed;
+      const completedTodo = this.todos.filter(todo => todo.completed == true);
+      const TaskTodo = completedTodo.map(todo => todo.task);
+      console.log('TaskTodo array:', TaskTodo)
+      this.setArray(TaskTodo);
+    },   
   }
 }
+
 </script>
 
 

@@ -5,10 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    myArray: [],
   },
   getters: {
   },
   mutations: {
+    setArray(state, newArray) {
+      state.myArray = newArray;
+    },
   },
   actions: {
   },
