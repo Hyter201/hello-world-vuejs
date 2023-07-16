@@ -43,7 +43,7 @@
       <v-col cols='12'>
         <ul>
           <li v-for="(todo, index) in todos " :key="index">
-            <input v-model="todo.completed" @click="sendTodo(todo)" class="me-2" id="status" type="checkbox" style="transform: scale(1.2);">
+            <input v-model="todo.completed" @click="sendTodo(todo)" class="me-2" type="checkbox" style="transform: scale(1.2);">
             {{ todo.task }}
 
             <!-- Bottone rinomina -->
