@@ -28,11 +28,7 @@
     </router-link>
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
+      <v-btn>
       <router-link to="/completati" style="color: white; text-decoration: none;">To-do Completati</router-link>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>

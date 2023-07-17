@@ -8,6 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     myArray: [],
+    myFilters: [],
+    username: '',
+    Thearray: [],
   },
   getters: {
   },
@@ -15,7 +18,19 @@ export default new Vuex.Store({
     setArray(state, newArray) {
       state.myArray = newArray;
     },
+
+    setFilters(state, newFilters) {
+      state.myFilters = newFilters;
+    },
+
+    setUsername(state, newUsername) {
+      state.username = newUsername;
   },
+
+  updateThearray(state, NewestArray) {
+    state.Thearray = NewestArray;
+},
+},
   actions: {
   },
   modules: {

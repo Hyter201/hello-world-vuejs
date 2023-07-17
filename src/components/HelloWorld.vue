@@ -43,18 +43,21 @@
       <v-col cols='12'>
         <ul>
           <li v-for="(todo, index) in todos " :key="index">
-            <input v-model="todo.completed" @click="sendTodo(todo)" class="me-2" type="checkbox" style="transform: scale(1.2);">
+            <input @click="sendTodo(todo)" class="me-2" type="checkbox"
+              style="transform: scale(1.2);">
             {{ todo.task }}
-
+            
             <!-- Bottone rinomina -->
-            <button @click="renameTodo(todo.task, index)" class="me-1 ms-2 mb-1"
-              style="border: 1px solid black; border-radius: 1rem; padding: 0.3rem; background-color: #67b9f87c; ">Rinomina
+            <button @click="renameTodo(todo, index)" class="me-1 ms-2 mb-1"
+              style=" border-radius: 1rem; padding: 0.3rem; background-color: #67b9f87c; "><i class="bi bi-pencil-fill"></i>
             </button>
 
             <!-- Bottone Cancella -->
-            <button @click="deleteTodo(index)"
-              style="border: 1px solid black; border-radius: 1rem; padding: 0.3rem; background-color: #f869677c; ">Cancella
+            <button @click="deleteTodo(index)" class="me-4"
+              style="border-radius: 1rem; padding: 0.3rem; background-color: #f869677c; "><i class="bi bi-x-lg"></i>
             </button>
+
+            <span @click="CompletedFilter(todo)" style="font-size: 14px; color: grey;">Utente:  <router-link to="">{{ todo.username }}</router-link></span>
           </li>
         </ul>
       </v-col>
@@ -63,8 +66,8 @@
 </template>
 
 <script>
-
 import { mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   // Dati
@@ -73,11 +76,19 @@ export default {
       isEditing: false,
       selectedIndex: null,
       todos: [
-        { task: 'Prova 1', completed: true },
-        { task: 'Prova 2', completed: false }
+        { task: 'Prova 1', completed: false, username: 'FantoccioNumero1'},
+        { task: 'Prova 2', completed: false, username: 'FantoccioNumero2'}
       ],
-      newTodo: ''
+      newTodo: '',
     }
+  },
+
+  computed: {
+    ...mapState(['username'])
+  },
+
+  mounted() {
+    console.log('Username:', this.username);
   },
 
   // Funzioni 
@@ -85,13 +96,13 @@ export default {
     AddTodo() {
       if (this.newTodo !== '') {
         this.newTodo.trim();
-        this.todos.push({ task: this.newTodo, completed: false });
+        this.todos.push({ task: this.newTodo, completed: false, username: this.username });
         this.newTodo = ''
       }
     },
 
     renameTodo(todo, index) {
-      this.newTodo = todo;
+      this.newTodo = todo.task;
       this.selectedIndex = index;
       this.isEditing = true;
     },
@@ -111,13 +122,21 @@ export default {
     sendTodo(todo) {
       todo.completed = !todo.completed;
       const completedTodo = this.todos.filter(todo => todo.completed == true);
-      const TaskTodo = completedTodo.map(todo => todo.task);
+      const TaskTodo = completedTodo.map(todo => ({ task: todo.task, username: todo.username }));
       console.log('TaskTodo array:', TaskTodo)
       this.setArray(TaskTodo);
-    },   
-  }
-}
+    },
 
+    // Seleziono più elementi con lo stesso username e che abbiano lo status "completato"
+    ...mapMutations(['setFilters']),
+    CompletedFilter(todo){
+      this.todos.username = todo.username;
+      const Filter = this.todos.filter(todo => todo.username === todo.username && todo.completed === true);
+      console.log(Filter)
+      this.setFilters(Filter);
+      }
+    }
+  }
 </script>
 
 
