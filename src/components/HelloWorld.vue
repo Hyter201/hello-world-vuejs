@@ -1,25 +1,6 @@
-<!-- <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="4">
-        <v-btn block elevation="2">Bottone 1</v-btn>
-      </v-col>
-      <v-col cols="4">
-        <router-link to="/"><v-btn block elevation="2">Home</v-btn></router-link>
-      </v-col>
-      <v-col cols="4"> -->
-        <!-- Router link serve per collegare le pagine -->
-        <!-- <router-link to="/about"><v-btn block elevation="2">About</v-btn></router-link>
-      </v-col>
-    </v-row>
-  </v-container>
-</template>     -->
-
-
 <template>
   <v-container>
     <v-row>
-
       <v-col cols="12">
         <h1>Da fare:</h1>
       </v-col>
@@ -43,21 +24,22 @@
       <v-col cols='12'>
         <ul>
           <li v-for="(todo, index) in todos " :key="index">
-            <input @click="sendTodo(todo)" class="me-2" type="checkbox"
-              style="transform: scale(1.2);">
+            <input @click="sendTodo(todo)" class="me-2 mb-5" type="checkbox" style="transform: scale(1.2);">
             {{ todo.task }}
-            
+
             <!-- Bottone rinomina -->
-            <button @click="renameTodo(todo, index)" class="me-1 ms-2 mb-1"
-              style=" border-radius: 1rem; padding: 0.3rem; background-color: #67b9f87c; "><i class="bi bi-pencil-fill"></i>
-            </button>
+            <a @click="renameTodo(todo, index)" class="me-1 ms-2 mb-1"
+              style="color: black; border-radius: 1rem; padding: 0.3rem; background-color: #67b9f87c; "><i
+                class="bi bi-pencil-fill"></i>
+            </a>
 
             <!-- Bottone Cancella -->
-            <button @click="deleteTodo(index)" class="me-4"
-              style="border-radius: 1rem; padding: 0.3rem; background-color: #f869677c; "><i class="bi bi-x-lg"></i>
-            </button>
+            <a @click="deleteTodo(index)" class="me-4"
+              style="color: black ;border-radius: 1rem; padding: 0.3rem; background-color: #f869677c; "><i
+                class="bi bi-x-lg"></i>
+            </a>
 
-            <span @click="CompletedFilter(todo)" style="font-size: 14px; color: grey;">Utente:  <router-link to="">{{ todo.username }}</router-link></span>
+            <span style="font-size: 14px; color: grey;">Utente: {{ todo.username }}</span>
           </li>
         </ul>
       </v-col>
@@ -76,8 +58,9 @@ export default {
       isEditing: false,
       selectedIndex: null,
       todos: [
-        { task: 'Prova 1', completed: false, username: 'FantoccioNumero1'},
-        { task: 'Prova 2', completed: false, username: 'FantoccioNumero2'}
+        { task: 'andare al mare', completed: false, username: 'FantoccioNumero1' },
+        { task: 'lezione di acquagym', completed: false, username: 'FantoccioNumero1' },
+        { task: 'comprare il latte', completed: false, username: 'FantoccioNumero2' }
       ],
       newTodo: '',
     }
@@ -108,7 +91,7 @@ export default {
     },
 
     updateTodo() {
-      this.todos.splice(this.selectedIndex, 1, { task: this.newTodo })
+      this.todos.splice(this.selectedIndex, 1, { task: this.newTodo, username: this.username })
       this.isEditing = false
       this.newTodo = ''
     },
@@ -126,17 +109,15 @@ export default {
       console.log('TaskTodo array:', TaskTodo)
       this.setArray(TaskTodo);
     },
-
-    // Seleziono più elementi con lo stesso username e che abbiano lo status "completato"
-    ...mapMutations(['setFilters']),
-    CompletedFilter(todo){
-      this.todos.username = todo.username;
-      const Filter = this.todos.filter(todo => todo.username === todo.username && todo.completed === true);
-      console.log(Filter)
-      this.setFilters(Filter);
-      }
-    }
+    // ...mapMutations(['setFilters']),
+    // CompletedFilter(todo){
+    //   this.todos.username = todo.username;
+    //   const Filter = this.todos.filter(todo => todo.username === todo.username && todo.completed === true);
+    //   console.log(Filter)
+    //   this.setFilters(Filter);
+    //   }
   }
+}
 </script>
 
 

@@ -28,8 +28,12 @@
     </router-link>
       <v-spacer></v-spacer>
 
-      <v-btn>
-      <router-link to="/completati" style="color: white; text-decoration: none;">To-do Completati</router-link>
+      <v-btn to="/albo"  class="me-5">Albo
+      <i class="bi bi-book ms-1"></i>
+      </v-btn>
+
+      <v-btn to="/completati" style="color: white; text-decoration: none;">To-do
+      Completati
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>

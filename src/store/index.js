@@ -8,7 +8,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     myArray: [],
-    myFilters: [],
     username: '',
     Thearray: [],
   },
@@ -17,10 +16,6 @@ export default new Vuex.Store({
   mutations: {
     setArray(state, newArray) {
       state.myArray = newArray;
-    },
-
-    setFilters(state, newFilters) {
-      state.myFilters = newFilters;
     },
 
     setUsername(state, newUsername) {
