@@ -22,7 +22,6 @@
           <span class="ms-2" @click="CompletedFilter(todo)" style="color: grey; font-size: 14px;">Utente: {{ todo.username
           }}</span>
         </li>
-
       </v-flex>
     </v-layout>
   </v-container>
