@@ -14,12 +14,12 @@
             <a style="color: gray; text-decoration: underline;">{{ todo.username }}</a></span>
         </li>
 
-        <h2 class="mt-5">Filtro utente:</h2>
+        <h2 class="mt-5">Filtro utentee:</h2>
         <li
           style="list-style: none; background-color: rgba(255, 255, 255, 0.996); border: 0.5px solid rgba(73, 73, 73, 0.429); border-radius: 0.5rem;"
           class="mb-3 mx-2" v-for="todo, index in Thearray" :key="index">
           {{ todo.task }}
-          <span class="ms-2" @click="CompletedFilter(todo)" style="color: grey; font-size: 14px;">Utente: {{ todo.username
+          <span class="ms-2" style="color: grey; font-size: 14px;">Utente: {{ todo.username
           }}</span>
         </li>
       </v-flex>
